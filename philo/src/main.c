@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 13:56:32 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/06/26 15:39:09 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/06/30 13:13:54 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ void	p_error(char *msg)
 	printf("%s\n", msg);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_data	data;
+
 	if (ac < 5 || ac > 6)
 		return (p_error(ERR_ARG), 0);
 	if (ac == 6)

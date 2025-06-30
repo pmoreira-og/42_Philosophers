@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 12:26:27 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/06/26 16:04:44 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/06/30 13:15:53 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,29 +56,23 @@ static int	check_overflow(long int *result, int digit, int base, int sign)
 	{
 		if (*result > (LONG_MAX - digit) / base)
 		{
-			if (sign == 1)
-				*result = LONG_MAX;
-			else
-				*result = LONG_MIN;
+			*result = LONG_MAX;
 			return (1);
 		}
 	}
 	else
 	{
-		if (*result > (LONG_MAX - digit) / base)
+		if (*result < (LONG_MIN + digit) / base)
 		{
-			if (sign == 1)
-			*result = LONG_MAX;
-			else
 			*result = LONG_MIN;
 			return (1);
 		}
 	}
-	*result = *result * base + digit;
+	*result = *result * base + sign * digit;
 	return (0);
 }
 
-static void	check_signal(int *sign,char	**s)
+static void	check_signal(int *sign, char **s)
 {
 	if (*(*s) == '+')
 		(*s) += 1;
@@ -114,13 +108,13 @@ long int	ft_strtol(char *s, char **endptr, int base, int *flag)
 	{
 		if (!get_digit(s, &digit, base))
 			break ;
-		if (flag) 
+		if (flag)
 			*flag = check_overflow(&result, digit, base, sign);
 		if (flag && *flag)
-			break;
+			break ;
 		s++;
 	}
 	if (endptr != NULL)
-		*endptr = (char *)s;
-	return (result * sign);
+		*endptr = s;
+	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:21:02 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/06/26 16:01:21 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/06/30 13:16:55 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,14 +46,12 @@ int	get_value(int *ptr, char *s)
 	char		*endptr;
 
 	value = ft_strtol(s, &endptr, 10, &flag);
-	printf("[%d]:%ld\n",flag, value);
 	if (flag)
 		return (0);
 	if (*endptr)
 		return (0);
-	
-	// if (value > INT_MAX || value < INT_MIN)
-	// 	return (0);
+	if (value > INT_MAX || value < INT_MIN)
+		return (0);
 	*ptr = (int) value;
 	return (1);
 }

@@ -6,12 +6,11 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:12:57 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/06/26 14:46:44 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/06/30 13:13:02 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCT_H
-# define STRUCT_H
+#pragma once
 
 typedef struct s_data
 {
@@ -20,5 +19,3 @@ typedef struct s_data
 	char	**av;
 	int		*array;
 }	t_data;
-
-#endif
