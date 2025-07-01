@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 13:56:32 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/06/30 13:13:54 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/01 17:11:50 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@ void	p_error(char *msg)
 {
 	printf("%s\n", msg);
 }
+
+/*
+	memset, printf, malloc, free, write,
+	usleep, gettimeofday, pthread_create,
+	pthread_detach, pthread_join, pthread_mutex_init,
+	pthread_mutex_destroy, pthread_mutex_lock,
+	pthread_mutex_unlock
+*/
 
 int	main(int ac, char **av)
 {
