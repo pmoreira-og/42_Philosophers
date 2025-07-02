@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:12:57 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/02 14:04:51 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/02 15:03:46 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,5 @@ typedef struct s_table
 	t_philo	*philos;
 	t_data	*data;
 }	t_table;
-
 
 #endif

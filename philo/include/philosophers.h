@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 13:50:59 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/02 14:29:25 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/02 15:03:26 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define ERR_STX "Invalid syntax of the arguments."
 
 //* Parsing
+
 long int	ft_strtol(char *s, char **endptr, int base, int *flag);
 int			ft_tolower(int c);
 int			ft_isspace(int c);
@@ -34,9 +35,14 @@ int			get_value(int *ptr, char *s);
 int			parser(t_data *data);
 
 //* Utils
+
 t_table		*init_table(int ac, char **av);
 void		clean_table(t_table *table);
 void		merror(char *msg);
 void		p_error(char *msg);
+
+//*Exec
+
+void		*routine(void *arg);
 
 #endif

@@ -34,7 +34,7 @@ DIR_UTILS = utils
 # === FILES ===
 SRC_GENERAL = main.c
 
-SRC_EXEC	= 
+SRC_EXEC	= routine.c
 
 SRC_PARSE	= parser.c checkers.c ft_strtol.c
 
