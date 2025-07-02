@@ -11,7 +11,7 @@ NAME = philo
 
 # === VALGRIND FLAGS ===
 VAL = valgrind --leak-check=full --show-leak-kinds=all --track-fds=yes \
-	--track-origins=yes --trace-children=yes --suppressions=readline.supp
+	--track-origins=yes
 
 # === COMPILATION ===
 CC = cc
@@ -38,7 +38,7 @@ SRC_EXEC	=
 
 SRC_PARSE	= parser.c checkers.c ft_strtol.c
 
-SRC_UTILS	= constructors.c cleaners.c
+SRC_UTILS	= constructors.c cleaners.c utils.c
 
 SRCS_DIR =	$(addprefix $(SRC)/, $(addprefix $(DIR_GENERAL)/, $(SRC_GENERAL))) \
 			$(addprefix $(SRC)/, $(addprefix $(DIR_EXEC)/, $(SRC_EXEC))) \
@@ -52,7 +52,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS_DIR)
 	@echo "$(YELLOW)Compiling $(NAME)...$(RESET)"
-	@$(CC) $(CFLAGS) $(OBJS_DIR) -o $(NAME) -lreadline
+	@$(CC) $(CFLAGS) $(OBJS_DIR) -o $(NAME)
 	@echo "$(GREEN)Done!$(RESET)"
 
 $(OBJDIR):

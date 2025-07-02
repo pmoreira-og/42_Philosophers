@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 13:50:59 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/06/26 15:55:24 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/02 14:29:25 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ int			get_value(int *ptr, char *s);
 int			parser(t_data *data);
 
 //* Utils
-void		init_data(t_data *data, int ac, char **av);
-void		clean_data(t_data *data);
+t_table		*init_table(int ac, char **av);
+void		clean_table(t_table *table);
+void		merror(char *msg);
+void		p_error(char *msg);
 
 #endif

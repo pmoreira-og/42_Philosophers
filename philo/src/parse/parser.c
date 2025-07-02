@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:29:16 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/06/30 13:16:08 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/02 14:02:34 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,7 @@ int	parser(t_data *data)
 {
 	if (!get_array(data))
 		return (0);
+	if (data->must_eat)
+		data->num_of_meals = data->array[4];
 	return (1);
 }

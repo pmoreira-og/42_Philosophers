@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/26 13:56:32 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/02 14:31:47 by pmoreira         ###   ########.fr       */
+/*   Created: 2025/07/02 14:09:48 by pmoreira          #+#    #+#             */
+/*   Updated: 2025/07/02 14:25:52 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-/*
-	memset, printf, malloc, free, write,
-	usleep, gettimeofday, pthread_create,
-	pthread_detach, pthread_join, pthread_mutex_init,
-	pthread_mutex_destroy, pthread_mutex_lock,
-	pthread_mutex_unlock
-*/
-
-int	main(int ac, char **av)
+void	merror(char *msg)
 {
-	t_table	*table;
+	if (msg)
+		printf("Malloc:%s\n", msg);
+}
 
-	if (ac < 5 || ac > 6)
-		return (p_error(ERR_ARG), 0);
-	table = init_table(ac, av);
-	if (!table)
-		return (1);
-	
-	return (clean_table(table), 0);
+void	p_error(char *msg)
+{
+	printf("%s\n", msg);
 }

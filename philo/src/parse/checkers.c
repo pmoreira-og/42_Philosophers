@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:21:02 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/06/30 13:16:55 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/02 13:29:52 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	get_value(int *ptr, char *s)
 		return (0);
 	if (*endptr)
 		return (0);
-	if (value > INT_MAX || value < INT_MIN)
+	if (value > INT_MAX || value < 1)
 		return (0);
 	*ptr = (int) value;
 	return (1);
