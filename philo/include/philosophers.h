@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 13:50:59 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/02 15:03:26 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/15 11:00:27 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,35 @@
 
 //* Parsing
 
-long int	ft_strtol(char *s, char **endptr, int base, int *flag);
 int			ft_tolower(int c);
 int			ft_isspace(int c);
 int			ft_isalpha(int c);
 int			ft_isdigit(int c);
-int			get_value(int *ptr, char *s);
-int			parser(t_data *data);
+int			get_value(unsigned int *ptr, char *s);
+int			parser(t_data *data, char **av);
+long int	ft_strtol(char *s, char **endptr, int base, int *flag);
 
 //* Utils
 
-t_table		*init_table(int ac, char **av);
-void		clean_table(t_table *table);
+bool		init_table(t_table *ptr, int ac, char **av);
+// void		clean_table(t_table *table);
 void		merror(char *msg);
 void		p_error(char *msg);
+void		p_state(long time, int id, t_state state);
+t_table		*get_table(t_table *data);
+long		get_current_time(void);
 
 //*Exec
 
 void		*routine(void *arg);
+void		*routine_odd(void *arg);
+void		unlock_fork(t_fork *data);
+void		lock_fork(t_fork *data);
+int			init_philos(t_table *table);
+
+//*Routine
+
+bool		check_is_dead(t_philo *philo, long start, long current);
+void		ft_eat(t_philo *philo);
 
 #endif

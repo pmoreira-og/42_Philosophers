@@ -34,11 +34,11 @@ DIR_UTILS = utils
 # === FILES ===
 SRC_GENERAL = main.c
 
-SRC_EXEC	= routine.c
+SRC_EXEC	= routine.c aux.c
 
 SRC_PARSE	= parser.c checkers.c ft_strtol.c
 
-SRC_UTILS	= constructors.c cleaners.c utils.c
+SRC_UTILS	= constructors.c utils.c
 
 SRCS_DIR =	$(addprefix $(SRC)/, $(addprefix $(DIR_GENERAL)/, $(SRC_GENERAL))) \
 			$(addprefix $(SRC)/, $(addprefix $(DIR_EXEC)/, $(SRC_EXEC))) \

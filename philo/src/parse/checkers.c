@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:21:02 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/02 13:29:52 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/15 11:04:52 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,13 @@ int	ft_tolower(int c)
 	return (c);
 }
 
-int	get_value(int *ptr, char *s)
+int	get_value(unsigned int *ptr, char *s)
 {
 	long int	value;
 	int			flag;
 	char		*endptr;
 
+	flag = 0;
 	value = ft_strtol(s, &endptr, 10, &flag);
 	if (flag)
 		return (0);
@@ -52,6 +53,6 @@ int	get_value(int *ptr, char *s)
 		return (0);
 	if (value > INT_MAX || value < 1)
 		return (0);
-	*ptr = (int) value;
+	*ptr = (unsigned int) value;
 	return (1);
 }

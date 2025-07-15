@@ -6,35 +6,34 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:29:16 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/02 14:02:34 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/15 11:00:18 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	get_array(t_data *data)
+int	get_array(t_data *data, char **av)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	data->array = malloc((data->ac - 1) * sizeof(int));
-	if (!data->array)
+	if (!get_value(&data->n_philos, av[1]))
 		return (0);
-	while (data->av[++i])
+	if (!get_value(&data->die_t, av[2]))
+		return (0);
+	if (!get_value(&data->eat_t, av[3]))
+		return (0);
+	if (!get_value(&data->sleep_t, av[4]))
+		return (0);
+	if (data->must_eat)
 	{
-		if (!get_value(&data->array[j++], data->av[i]))
-			return (free(data->array), 0);
+		if (!get_value(&data->num_of_meals, av[5]))
+			return (0);
 	}
+	data->think_t = data->die_t - data->eat_t - data->sleep_t;
 	return (1);
 }
 
-int	parser(t_data *data)
+int	parser(t_data *data, char **av)
 {
-	if (!get_array(data))
+	if (!get_array(data, av))
 		return (0);
-	if (data->must_eat)
-		data->num_of_meals = data->array[4];
 	return (1);
 }
