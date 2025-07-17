@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 13:50:59 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/15 11:00:27 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/17 14:15:11 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,9 @@ long int	ft_strtol(char *s, char **endptr, int base, int *flag);
 //* Utils
 
 bool		init_table(t_table *ptr, int ac, char **av);
-// void		clean_table(t_table *table);
 void		merror(char *msg);
 void		p_error(char *msg);
-void		p_state(long time, int id, t_state state);
+void		p_state(long time, int id, t_state state, bool save);
 t_table		*get_table(t_table *data);
 long		get_current_time(void);
 
@@ -48,13 +47,20 @@ long		get_current_time(void);
 
 void		*routine(void *arg);
 void		*routine_odd(void *arg);
-void		unlock_fork(t_fork *data);
-void		lock_fork(t_fork *data);
+void		ft_mutex(pthread_mutex_t *mutex, t_state request);
 int			init_philos(t_table *table);
+bool		check_dead_table(void);
 
 //*Routine
 
-bool		check_is_dead(t_philo *philo, long start, long current);
-void		ft_eat(t_philo *philo);
+bool		ft_eat(t_philo *philo);
+bool		ft_think(t_philo *philo);
+bool		ft_sleep(t_philo *philo);
+void		waiter(t_table *table);
+bool		check_meals(t_philo *philo, unsigned int meals);
+void		*test_rt(void *arg);
+
+void	print_philo(const t_philo *philo);
+
 
 #endif

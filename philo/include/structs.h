@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:12:57 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/15 10:38:26 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/17 11:52:31 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,9 @@ typedef enum e_state
 	SLEEPING,
 	HAS_FORK,
 	DIED,
-	LOCKED,
-	UNLOCKED
+	LOCK,
+	UNLOCK
 }	t_state;
-
-typedef struct s_fork
-{
-	t_state			status;
-	pthread_mutex_t	lock;
-}	t_fork;
 
 /// @brief Philosopher struct.
 /// @param trd Thread of the philosopher.
@@ -55,12 +49,14 @@ typedef struct s_fork
 /// @param locked Mutex to lock the access to the philosopher.
 typedef struct s_philo
 {
-	pthread_t		trd;
-	unsigned int	id;
-	unsigned int	c_meal;
-	long long		last_meal;
-	t_fork			l_fork;
-	t_fork			*r_fork;
+	pthread_t				trd;
+	unsigned int			id;
+	unsigned int			c_meal;
+	long long				last_meal;
+	t_data					*data;
+	pthread_mutex_t			l_fork;
+	pthread_mutex_t			*r_fork;
+	pthread_mutex_t			locked;
 }	t_philo;
 
 typedef struct s_table

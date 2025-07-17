@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 14:09:48 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/15 10:13:20 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/17 15:56:56 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	merror(char *msg)
 
 void	p_error(char *msg)
 {
-	printf("%s\n", msg);
+	if (msg)
+		printf("%s\n", msg);
 }
 
 char	*get_state(t_state state)
@@ -39,7 +40,12 @@ char	*get_state(t_state state)
 }
 
 /// @brief Prints philosopher state.
-void	p_state(long time, int id, t_state state)
+void	p_state(long time, int id, t_state state, bool save)
 {
-	printf("%ld %d %s\n", time, id, get_state(state));
+	static long	start;
+
+	if (save)
+		start = time;
+	else
+		printf("%ld %d %s\n", time - start, id, get_state(state));
 }

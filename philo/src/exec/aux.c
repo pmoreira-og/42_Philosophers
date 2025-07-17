@@ -6,27 +6,22 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 11:19:37 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/14 15:10:02 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/17 15:45:39 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	lock_fork(t_fork *data)
+void	ft_mutex(pthread_mutex_t *mutex, t_state request)
 {
-	if (data)
+	if (mutex)
 	{
-		pthread_mutex_lock(&data->lock);
-		data->status = LOCKED;
-	}
-}
-
-void	unlock_fork(t_fork *data)
-{
-	if (data)
-	{
-		pthread_mutex_unlock(&data->lock);
-		data->status = UNLOCKED;
+		if (request == LOCK)
+			pthread_mutex_lock(mutex);
+		else if (request == UNLOCK)
+			pthread_mutex_unlock(mutex);
+		else
+			return ;
 	}
 }
 
@@ -37,4 +32,23 @@ long	get_current_time(void)
 	if (gettimeofday(&time, NULL) == -1)
 		write(2, "gettimeofday() error\n", 22);
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+
+bool	check_dead_table(void)
+{
+	t_table	*table;
+
+	table = get_table(NULL);
+	ft_mutex(&table->locked, LOCK);
+	if (table->dead)
+		return (ft_mutex(&table->locked, UNLOCK), true);
+	return (ft_mutex(&table->locked, UNLOCK), false);
+}
+
+bool	check_meals(t_philo *philo, unsigned int meals)
+{
+	ft_mutex(&philo->locked, LOCK);
+	if (philo->c_meal >= meals)
+		return (ft_mutex(&philo->locked, UNLOCK), true);
+	return (ft_mutex(&philo->locked, UNLOCK), false);
 }
