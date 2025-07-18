@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:27:13 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/18 11:45:38 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/18 12:12:18 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ int	init_data(t_data *data, int ac, char **av)
 	data->num_of_meals = -1;
 	if (!parser(data, av))
 		return (p_error(ERR_STX), 0);
+	if (data->n_philos == 0)
+	{
+		p_error("Invalid number of philosophers. Must be at least one");
+		return (0);
+	}
 	return (1);
 }
 

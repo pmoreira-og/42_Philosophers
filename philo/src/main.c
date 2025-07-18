@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 13:56:32 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/18 11:47:12 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/18 12:07:13 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,8 @@ int	main(int ac, char **av)
 		return (p_error(ERR_ARG), 0);
 	if (!init_table(&table, ac, av))
 		return (1);
+	if (table.data.must_eat && (table.data.num_of_meals == 0))
+		return (free(table.philos), 0);
 	if (!init_philos(&table))
 		return (free(table.philos), 1);
 	return (free(table.philos), 0);
