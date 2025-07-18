@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:12:57 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/17 11:52:31 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/18 16:04:49 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,11 @@ typedef struct s_philo
 typedef struct s_table
 {
 	bool			dead;
+	unsigned int	done_meals;
 	t_philo			*philos;
 	t_data			data;
 	pthread_mutex_t	locked;
+	pthread_mutex_t	mtx_done;
 }	t_table;
 
 #endif

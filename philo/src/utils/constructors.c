@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:27:13 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/18 12:12:18 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/18 16:05:01 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,6 @@ bool	init_table(t_table *ptr, int ac, char **av)
 	get_table(ptr);
 	gettimeofday(&ptr->data.tv, NULL);
 	pthread_mutex_init(&ptr->locked, NULL);
+	pthread_mutex_init(&ptr->mtx_done, NULL);
 	return (true);
 }
