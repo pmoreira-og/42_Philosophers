@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:27:13 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/17 15:40:29 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/18 11:45:38 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	init_philos(t_table *table)
 		i++;
 	}
 	if (!init_trds(table))
-			return (0);
+		return (0);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 11:19:37 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/17 15:45:39 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/18 11:46:38 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_mutex(pthread_mutex_t *mutex, t_state request)
 	}
 }
 
-long	get_current_time(void)
+long long	get_current_time(void)
 {
 	struct timeval	time;
 

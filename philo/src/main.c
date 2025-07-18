@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 13:56:32 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/17 15:57:36 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/18 11:47:12 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,48 @@
 	pthread_mutex_unlock
 */
 
-void	*routine_odd(void *arg)
+bool	check_is_dead(t_philo *philo, long current)
 {
-	t_philo	*philo;
+	t_table	*table;
 
-	philo = (t_philo *)arg;
+	table = get_table(NULL);
+	ft_mutex(&table->locked, LOCK);
+	if (table->dead)
+		return (ft_mutex(&table->locked, UNLOCK), true);
+	ft_mutex(&philo->locked, LOCK);
+	if ((current - philo->last_meal) > table->data.die_t)
+	{
+		table->dead = true;
+		ft_mutex(&philo->locked, UNLOCK);
+		return (ft_mutex(&table->locked, UNLOCK), true);
+	}
+	ft_mutex(&philo->locked, UNLOCK);
+	return (ft_mutex(&table->locked, UNLOCK), false);
+}
+
+void	waiter(t_table *table)
+{
+	unsigned int	i;
+
 	while (1)
 	{
-		if (!ft_eat(philo))
-			break ;
-		if (!ft_sleep(philo))
-			break ;
-		usleep(philo->data->sleep_t);
-		if (!ft_think(philo))
-			break ;
+		i = 0;
+		while (i < table->data.n_philos)
+		{
+			usleep(100);
+			if (table->data.must_eat)
+			{
+				if (check_meals(&table->philos[i], table->data.num_of_meals))
+					return ;
+			}
+			if (check_is_dead(&table->philos[i], get_current_time()))
+			{
+				p_state(get_current_time(), table->philos[i].id, DIED, false);
+				return ;
+			}
+			i++;
+		}
 	}
-	return (NULL);
 }
 
 void	*routine(void *arg)
@@ -57,8 +83,6 @@ void	*routine(void *arg)
 	return (NULL);
 }
 
-
-
 t_table	*get_table(t_table *data)
 {
 	static t_table	*address;
@@ -72,57 +96,6 @@ t_table	*get_table(t_table *data)
 		return (address);
 }
 
-void	print_philo(const t_philo *philo)
-{
-	t_table *table = get_table(NULL);
-
-	ft_mutex(&table->locked, LOCK);
-	printf("Philosopher ID: %u\n", philo->id);
-	printf("  Number of meals eaten: %u\n", philo->c_meal);
-	printf("  Last meal timestamp: %lld\n", philo->last_meal);
-	printf("  Data pointer: %p\n", (void*)philo->data);
-	printf("  Left fork mutex: %p\n", (void*)&philo->l_fork);
-	printf("  Right fork mutex: %p\n", (void*)philo->r_fork);
-	printf("  Locked mutex: %p\n", (void*)&philo->locked);
-	printf("  Thread: %lu\n", (unsigned long)philo->trd);
-	printf("\n");
-	ft_mutex(&table->locked, UNLOCK);
-
-}
-
-void print_data(const t_data *data) {
-    printf("t_data:\n");
-    printf("  must_eat: %s\n", data->must_eat ? "true" : "false");
-    printf("  tv (timeval): %ld sec, %ld usec\n", data->tv.tv_sec, data->tv.tv_usec);
-    printf("  n_philos: %u\n", data->n_philos);
-    printf("  num_of_meals: %u\n", data->num_of_meals);
-    printf("  die_t: %u\n", data->die_t);
-    printf("  eat_t: %u\n", data->eat_t);
-    printf("  sleep_t: %u\n", data->sleep_t);
-    printf("  think_t: %u\n", data->think_t);
-    printf("\n");
-}
-
-void print_table(const t_table *table) {
-    printf("Table:\n");
-    printf("  dead: %s\n", table->dead ? "true" : "false");
-    printf("  Locked mutex: %p\n", (void*)&table->locked);
-    print_data(&table->data);
-    printf("Philosophers:\n");
-    for (unsigned int i = 0; i < table->data.n_philos; ++i) {
-        print_philo(&table->philos[i]);
-    }
-}
-
-void	*test_rt(void *arg)
-{
-	t_philo	*philo;
-
-	// (void) arg;
-	philo = (t_philo *) arg;
-	print_philo(philo);
-	return (NULL);
-}
 int	main(int ac, char **av)
 {
 	t_table	table;
@@ -133,6 +106,5 @@ int	main(int ac, char **av)
 		return (1);
 	if (!init_philos(&table))
 		return (free(table.philos), 1);
-	// print_table(&table);
 	return (free(table.philos), 0);
 }

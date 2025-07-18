@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 14:09:48 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/17 15:56:56 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/18 11:51:02 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,14 @@ char	*get_state(t_state state)
 }
 
 /// @brief Prints philosopher state.
-void	p_state(long time, int id, t_state state, bool save)
+void	p_state(long long time, int id, t_state state, bool save)
 {
 	static long	start;
 
 	if (save)
 		start = time;
 	else
-		printf("%ld %d %s\n", time - start, id, get_state(state));
+	{
+		printf("%lld %d %s\n", time - start, id, get_state(state));
+	}
 }

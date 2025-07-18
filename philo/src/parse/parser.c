@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:29:16 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/17 15:24:27 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/18 11:45:55 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ int	get_array(t_data *data, char **av)
 	}
 	else
 		data->num_of_meals = 0;
-	if ((data->eat_t + data->sleep_t) >= data->die_t)
-		data->think_t = 0;
-	else
-		data->think_t = data->die_t - data->eat_t - data->sleep_t;
+	data->think_t = 0;
 	return (1);
 }
 
