@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 14:09:48 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/18 11:51:02 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/18 14:30:51 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,18 @@ char	*get_state(t_state state)
 /// @brief Prints philosopher state.
 void	p_state(long long time, int id, t_state state, bool save)
 {
-	static long	start;
+	static long				start;
+	static pthread_mutex_t	mtx;
 
 	if (save)
+	{
+		pthread_mutex_init(&mtx, NULL);
 		start = time;
+	}
 	else
 	{
+		ft_mutex(&mtx, LOCK);
 		printf("%lld %d %s\n", time - start, id, get_state(state));
+		ft_mutex(&mtx, UNLOCK);
 	}
 }
