@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:12:57 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/18 16:04:49 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/18 16:15:32 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_philo
 	pthread_t				trd;
 	unsigned int			id;
 	unsigned int			c_meal;
+	bool					done;
 	long long				last_meal;
 	t_data					*data;
 	pthread_mutex_t			l_fork;
