@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 13:56:32 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/21 10:19:01 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/21 14:53:21 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	waiter(t_table *table)
 		i = 0;
 		while (i < table->data.n_philos)
 		{
-			usleep(100);
+			get_a_rest(100);
 			if (check_is_dead(&table->philos[i], get_current_time()))
 			{
 				p_state(get_current_time(), table->philos[i].id, DIED, false);
@@ -97,10 +97,10 @@ void	*routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *) arg;
+	if (philo->id % 2 != 0)
+		get_a_rest(philo->data->eat_t * 0.5);
 	while (1)
 	{
-		if ((philo->id - 1) % 2 != 0)
-			usleep(100);
 		if (!ft_eat(philo))
 			break ;
 		if (!ft_sleep(philo))
