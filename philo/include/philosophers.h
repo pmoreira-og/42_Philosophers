@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 13:50:59 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/18 15:53:31 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/21 10:18:02 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void		*routine_odd(void *arg);
 void		ft_mutex(pthread_mutex_t *mutex, t_state request);
 int			init_philos(t_table *table);
 bool		check_dead_table(void);
+void		update_dead(t_table *table);
 
 //*Routine
 
@@ -59,5 +60,6 @@ bool		ft_sleep(t_philo *philo);
 void		waiter(t_table *table);
 bool		check_meals(t_table *table, t_philo *philo, unsigned int meals);
 void		*test_rt(void *arg);
+void print_philo(const t_philo *philo);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 11:19:37 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/18 16:16:15 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/21 09:50:32 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,14 @@ bool	check_dead_table(void)
 
 bool	check_meals(t_table *table, t_philo *philo, unsigned int meals)
 {
-	bool result = false;
+	bool	result;
 
+	result = false;
 	ft_mutex(&philo->locked, LOCK);
 	if (philo->c_meal >= meals && !philo->done)
 	{
-		philo->done = true;
 		ft_mutex(&table->mtx_done, LOCK);
+		philo->done = true;
 		table->done_meals += 1;
 		if (table->done_meals >= table->data.n_philos)
 		{
@@ -64,4 +65,11 @@ bool	check_meals(t_table *table, t_philo *philo, unsigned int meals)
 	}
 	ft_mutex(&philo->locked, UNLOCK);
 	return (result);
+}
+
+void	update_dead(t_table *table)
+{
+	ft_mutex(&table->locked, LOCK);
+	table->dead = true;
+	ft_mutex(&table->locked, UNLOCK);
 }

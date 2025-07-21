@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 13:56:32 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/18 16:00:58 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/21 10:19:01 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,41 @@ void	waiter(t_table *table)
 			}
 			if (table->data.must_eat)
 			{
-				if (check_meals(table, &table->philos[i], table->data.num_of_meals))
-				{
-					ft_mutex(&table->locked, LOCK);
-					table->dead = true;
-					ft_mutex(&table->locked, UNLOCK);
-					return ;
-				}
+				if (check_meals(table, &table->philos[i],
+						table->data.num_of_meals))
+					return (update_dead(table));
 			}
 			i++;
 		}
 	}
 }
+
+void print_philo(const t_philo *philo)
+{
+    printf("Philosopher ID: %u\n", philo->id);
+    printf("  Number of meals eaten: %u\n", philo->c_meal);
+    printf("  Last meal timestamp: %lld\n", philo->last_meal);
+    printf("  Data pointer: %p\n", (void*)philo->data);
+    printf("  Left fork mutex: %p\n", (void*)&philo->l_fork);
+    printf("  Right fork mutex ptr: %p\n", (void*)philo->r_fork);
+    if (philo->r_fork) {
+        printf("    (Points to mutex at address: %p)\n", (void*)philo->r_fork);
+    } else {
+        printf("    (Right fork pointer is NULL)\n");
+    }
+    printf("  Locked mutex: %p\n", (void*)&philo->locked);
+    printf("  Thread: %lu\n", (unsigned long)philo->trd);
+    printf("\n");
+}
+
+// void	*routine(void *arg)
+// {
+// 	t_philo	*philo;
+
+// 	philo = (t_philo *) arg;
+// 	print_philo(philo);
+// 	return (NULL);
+// }
 
 void	*routine(void *arg)
 {

@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:12:57 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/18 16:15:32 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/21 11:49:17 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 typedef struct s_data
 {
 	bool				must_eat;
-	struct timeval		tv;
 	unsigned int		n_philos;
 	unsigned int		num_of_meals;
 	unsigned int		die_t;

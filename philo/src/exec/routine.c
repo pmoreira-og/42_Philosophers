@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 14:59:46 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/18 15:18:10 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/21 10:43:33 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	release_forks(t_philo *philo)
 	}
 }
 
-void	grab_forks(t_philo *philo)
+bool	grab_forks(t_philo *philo)
 {
 	if ((philo->id - 1) % 2 == 0)
 		ft_mutex(&philo->l_fork, LOCK);
@@ -34,17 +34,21 @@ void	grab_forks(t_philo *philo)
 		ft_mutex(philo->r_fork, LOCK);
 	if (!check_dead_table())
 		p_state(get_current_time(), philo->id, HAS_FORK, false);
+	if (!philo->r_fork)
+		return (ft_mutex(&philo->l_fork, UNLOCK), false);
 	if ((philo->id - 1) % 2 == 0)
 		ft_mutex(philo->r_fork, LOCK);
 	else
 		ft_mutex(&philo->l_fork, LOCK);
 	if (!check_dead_table())
 		p_state(get_current_time(), philo->id, HAS_FORK, false);
+	return (true);
 }
 
 bool	ft_eat(t_philo *philo)
 {
-	grab_forks(philo);
+	if (!grab_forks(philo))
+		return (false);
 	if (!check_dead_table())
 	{
 		ft_mutex(&philo->locked, LOCK);
