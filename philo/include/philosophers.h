@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 13:50:59 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/21 14:15:52 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/21 16:11:24 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,5 @@ bool		ft_think(t_philo *philo);
 bool		ft_sleep(t_philo *philo);
 void		waiter(t_table *table);
 bool		check_meals(t_table *table, t_philo *philo, unsigned int meals);
-void		*test_rt(void *arg);
-void print_philo(const t_philo *philo);
 
 #endif

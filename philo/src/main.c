@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 13:56:32 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/21 14:53:21 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/21 16:12:10 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ bool	check_is_dead(t_philo *philo, long current)
 	if (table->dead)
 		return (ft_mutex(&table->locked, UNLOCK), true);
 	ft_mutex(&philo->locked, LOCK);
-	if ((current - philo->last_meal) >= table->data.die_t)
+	if ((current - philo->last_meal) > table->data.die_t)
 	{
 		table->dead = true;
 		ft_mutex(&philo->locked, UNLOCK);
@@ -65,40 +65,13 @@ void	waiter(t_table *table)
 	}
 }
 
-void print_philo(const t_philo *philo)
-{
-    printf("Philosopher ID: %u\n", philo->id);
-    printf("  Number of meals eaten: %u\n", philo->c_meal);
-    printf("  Last meal timestamp: %lld\n", philo->last_meal);
-    printf("  Data pointer: %p\n", (void*)philo->data);
-    printf("  Left fork mutex: %p\n", (void*)&philo->l_fork);
-    printf("  Right fork mutex ptr: %p\n", (void*)philo->r_fork);
-    if (philo->r_fork) {
-        printf("    (Points to mutex at address: %p)\n", (void*)philo->r_fork);
-    } else {
-        printf("    (Right fork pointer is NULL)\n");
-    }
-    printf("  Locked mutex: %p\n", (void*)&philo->locked);
-    printf("  Thread: %lu\n", (unsigned long)philo->trd);
-    printf("\n");
-}
-
-// void	*routine(void *arg)
-// {
-// 	t_philo	*philo;
-
-// 	philo = (t_philo *) arg;
-// 	print_philo(philo);
-// 	return (NULL);
-// }
-
 void	*routine(void *arg)
 {
 	t_philo	*philo;
 
 	philo = (t_philo *) arg;
 	if (philo->id % 2 != 0)
-		get_a_rest(philo->data->eat_t * 0.5);
+		get_a_rest(100);
 	while (1)
 	{
 		if (!ft_eat(philo))
