@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 13:50:59 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/21 16:11:24 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/22 15:40:57 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,12 @@
 # include "structs.h"
 # define ERR_ARG "Invalid number of arguments."
 # define ERR_STX "Invalid syntax of the arguments."
-
+# define RED "\e[0;31m"
+# define GRN "\e[0;32m"
+# define YEL "\e[0;33m"
+# define BLU "\e[0;34m"
+# define MAG "\e[0;35m"
+# define DEF "\e[0m"
 //* Parsing
 
 int			ft_tolower(int c);
@@ -37,9 +42,8 @@ long int	ft_strtol(char *s, char **endptr, int base, int *flag);
 //* Utils
 
 bool		init_table(t_table *ptr, int ac, char **av);
-void		merror(char *msg);
 void		p_error(char *msg);
-void		p_state(long long time, int id, t_state state, bool save);
+bool		p_state(long long time, int id, t_state state, bool save);
 t_table		*get_table(t_table *data);
 long long	get_current_time(void);
 bool		get_a_rest(unsigned int sleep_t);

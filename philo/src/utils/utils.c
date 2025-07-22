@@ -6,17 +6,11 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 14:09:48 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/21 16:11:37 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/22 15:40:54 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-void	merror(char *msg)
-{
-	if (msg)
-		printf("Malloc:%s\n", msg);
-}
 
 void	p_error(char *msg)
 {
@@ -39,22 +33,41 @@ char	*get_state(t_state state)
 	return ("");
 }
 
-/// @brief Prints philosopher state.
-void	p_state(long long time, int id, t_state state, bool save)
+void	color_print(long long time, int id, t_state state)
 {
-	static long				start;
-	static pthread_mutex_t	mtx;
+	if (state == DIED)
+		printf(RED"%lld %d %s\n"DEF, time, id, get_state(state));
+	if (state == THINKING)
+		printf(BLU"%lld %d %s\n"DEF, time, id, get_state(state));
+	if (state == HAS_FORK)
+		printf(YEL"%lld %d %s\n"DEF, time, id, get_state(state));
+	if (state == SLEEPING)
+		printf(MAG"%lld %d %s\n"DEF, time, id, get_state(state));
+	if (state == EATING)
+		printf(GRN"%lld %d %s\n"DEF, time, id, get_state(state));
+}
+
+/// @brief Prints philosopher state.
+bool	p_state(long long time, int id, t_state state, bool save)
+{
+	static long long		start;
+	static t_table			*table;
 
 	if (save)
 	{
-		pthread_mutex_init(&mtx, NULL);
+		table = get_table(NULL);
 		start = time;
+		return (true);
 	}
 	else
 	{
-		ft_mutex(&mtx, LOCK);
-		printf("%lld %d %s\n", time - start, id, get_state(state));
-		ft_mutex(&mtx, UNLOCK);
+		ft_mutex(&table->locked, LOCK);
+		if (!table->dead)
+			color_print(time - start, id, state);
+		else
+			return (ft_mutex(&table->locked, UNLOCK), false);
+		ft_mutex(&table->locked, UNLOCK);
+		return (true);
 	}
 }
 
@@ -70,7 +83,7 @@ bool	get_a_rest(unsigned int sleep_t)
 	elapsed_time = 0;
 	while (elapsed_time < sleep_t)
 	{
-		usleep(10);
+		usleep(1);
 		curr_time = get_current_time();
 		elapsed_time = curr_time - t_start;
 		if (check_dead_table())

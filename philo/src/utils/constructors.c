@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:27:13 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/21 11:49:33 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/22 15:40:25 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ bool	init_table(t_table *ptr, int ac, char **av)
 		return (false);
 	ptr->philos = malloc(sizeof(t_philo) * (ptr->data.n_philos));
 	if (!ptr->philos)
-		return (merror("table:philos"), false);
+		return (printf("Malloc:table:philos\n"), false);
 	memset(ptr->philos, 0, sizeof(t_philo) * (ptr->data.n_philos));
 	get_table(ptr);
 	pthread_mutex_init(&ptr->locked, NULL);

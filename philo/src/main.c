@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 13:56:32 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/21 16:12:10 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/22 15:39:00 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,13 @@
 	pthread_mutex_unlock
 */
 
-bool	check_is_dead(t_philo *philo, long current)
+bool	check_is_dead(t_philo *philo)
 {
-	t_table	*table;
-
-	table = get_table(NULL);
-	ft_mutex(&table->locked, LOCK);
-	if (table->dead)
-		return (ft_mutex(&table->locked, UNLOCK), true);
 	ft_mutex(&philo->locked, LOCK);
-	if ((current - philo->last_meal) > table->data.die_t)
-	{
-		table->dead = true;
-		ft_mutex(&philo->locked, UNLOCK);
-		return (ft_mutex(&table->locked, UNLOCK), true);
-	}
+	if ((get_current_time() - philo->last_meal) > philo->data->die_t)
+		return (ft_mutex(&philo->locked, UNLOCK), true);
 	ft_mutex(&philo->locked, UNLOCK);
-	return (ft_mutex(&table->locked, UNLOCK), false);
+	return (false);
 }
 
 void	waiter(t_table *table)
@@ -49,10 +39,10 @@ void	waiter(t_table *table)
 		while (i < table->data.n_philos)
 		{
 			get_a_rest(100);
-			if (check_is_dead(&table->philos[i], get_current_time()))
+			if (check_is_dead(&table->philos[i]))
 			{
 				p_state(get_current_time(), table->philos[i].id, DIED, false);
-				return ;
+				return (update_dead(table));
 			}
 			if (table->data.must_eat)
 			{
@@ -71,7 +61,7 @@ void	*routine(void *arg)
 
 	philo = (t_philo *) arg;
 	if (philo->id % 2 != 0)
-		get_a_rest(100);
+		get_a_rest(philo->data->eat_t * 0.5);
 	while (1)
 	{
 		if (!ft_eat(philo))
