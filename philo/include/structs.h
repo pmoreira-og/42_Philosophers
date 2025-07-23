@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:12:57 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/21 11:49:17 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/23 14:35:23 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ typedef struct s_table
 	t_philo			*philos;
 	t_data			data;
 	pthread_mutex_t	locked;
-	pthread_mutex_t	mtx_done;
 }	t_table;
 
 #endif

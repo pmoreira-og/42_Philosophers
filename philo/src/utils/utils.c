@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 14:09:48 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/23 11:42:05 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/23 14:11:56 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ bool	get_a_rest(long long sleep_t)
 	elapsed_time = 0;
 	while (elapsed_time < sleep_t)
 	{
-		usleep(1);
+		usleep(100);
 		curr_time = get_current_time();
 		elapsed_time = curr_time - t_start;
 		if (check_dead_table())

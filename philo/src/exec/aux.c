@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 11:19:37 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/21 09:50:32 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/23 14:32:36 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ bool	check_meals(t_table *table, t_philo *philo, unsigned int meals)
 	ft_mutex(&philo->locked, LOCK);
 	if (philo->c_meal >= meals && !philo->done)
 	{
-		ft_mutex(&table->mtx_done, LOCK);
+		ft_mutex(&table->locked, LOCK);
 		philo->done = true;
 		table->done_meals += 1;
 		if (table->done_meals >= table->data.n_philos)
@@ -61,7 +61,7 @@ bool	check_meals(t_table *table, t_philo *philo, unsigned int meals)
 			table->dead = true;
 			result = true;
 		}
-		ft_mutex(&table->mtx_done, UNLOCK);
+		ft_mutex(&table->locked, UNLOCK);
 	}
 	ft_mutex(&philo->locked, UNLOCK);
 	return (result);
