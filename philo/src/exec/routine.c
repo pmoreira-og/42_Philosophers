@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 14:59:46 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/22 12:36:45 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/23 12:03:17 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,15 @@ bool	ft_sleep(t_philo *philo)
 
 bool	ft_think(t_philo *philo)
 {
-	int	time;
+	long	time;
 
-	time = philo->data->die_t - philo->data->eat_t - philo->data->sleep_t;
-	if (time <= 0)
-		time = 0;
 	if (!p_state(get_current_time(), philo->id, THINKING, false))
 		return (false);
-	get_a_rest(time);
+	if (philo->data->n_philos % 2 == 0)
+		return (true);
+	time = 2 * philo->data->eat_t - philo->data->sleep_t;
+	if (time < 0)
+		time = 0;
+	get_a_rest(time * 0.42);
 	return (true);
 }

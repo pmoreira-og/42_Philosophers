@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 14:09:48 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/22 15:40:54 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/23 11:42:05 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ bool	p_state(long long time, int id, t_state state, bool save)
 	}
 }
 
-bool	get_a_rest(unsigned int sleep_t)
+bool	get_a_rest(long long sleep_t)
 {
 	long	t_start;
 	long	curr_time;

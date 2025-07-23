@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 13:50:59 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/22 15:40:57 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/23 11:42:17 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void		p_error(char *msg);
 bool		p_state(long long time, int id, t_state state, bool save);
 t_table		*get_table(t_table *data);
 long long	get_current_time(void);
-bool		get_a_rest(unsigned int sleep_t);
+bool		get_a_rest(long long sleep_t);
 
 //*Exec
 
