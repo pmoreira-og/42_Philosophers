@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 13:56:32 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/23 14:13:57 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/24 11:34:00 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,12 @@ int	main(int ac, char **av)
 	t_table	table;
 
 	if (ac < 5 || ac > 6)
-		return (p_error(ERR_ARG), 0);
+	{
+		p_error(ERR_ARG);
+		write(2, USAGE, ft_strlen(USAGE));
+		write(2, USAGE2, ft_strlen(USAGE2));
+		return (0);
+	}
 	if (!init_table(&table, ac, av))
 		return (1);
 	if (table.data.must_eat && (table.data.num_of_meals == 0))

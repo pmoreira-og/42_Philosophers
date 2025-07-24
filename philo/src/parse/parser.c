@@ -6,11 +6,23 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:29:16 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/18 11:45:55 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/24 11:26:38 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+size_t	ft_strlen(char *s)
+{
+	size_t	len;
+
+	if (!s)
+		return (0);
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
+}
 
 int	get_array(t_data *data, char **av)
 {

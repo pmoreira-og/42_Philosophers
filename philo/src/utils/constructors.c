@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:27:13 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/23 14:35:19 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/24 11:35:14 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,15 @@ int	init_data(t_data *data, int ac, char **av)
 	if (!parser(data, av))
 		return (p_error(ERR_STX), 0);
 	if (data->n_philos == 0)
-	{
-		p_error("Invalid number of philosophers. Must be at least one");
-		return (0);
-	}
+		return (p_error(": must be at least one philosopher."), 0);
+	if (data->die_t == 0)
+		return (p_error(": die time should be bigger than zero."), 0);
+	if (data->eat_t == 0)
+		return (p_error(": eat time should be bigger than zero."), 0);
+	if (data->sleep_t == 0)
+		return (p_error(": sleep time should be bigger than zero."), 0);
+	if (data->must_eat && data->num_of_meals == 0)
+		return (p_error(": must be at least one meal."), 0);
 	return (1);
 }
 
@@ -99,7 +104,11 @@ bool	init_table(t_table *ptr, int ac, char **av)
 {
 	memset(ptr, 0, sizeof(t_table));
 	if (!init_data(&ptr->data, ac, av))
+	{
+		write(2, USAGE, ft_strlen(USAGE));
+		write(2, USAGE2, ft_strlen(USAGE2));
 		return (false);
+	}
 	ptr->philos = malloc(sizeof(t_philo) * (ptr->data.n_philos));
 	if (!ptr->philos)
 		return (printf("Malloc:table:philos\n"), false);

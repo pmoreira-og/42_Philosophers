@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 14:09:48 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/23 14:11:56 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/23 16:16:44 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,15 @@
 
 void	p_error(char *msg)
 {
+	int	i;
+
+	i = 0;
+	while (msg && msg[i])
+		i++;
+	write(2, "Invalid arguments ", 18);
 	if (msg)
-		printf("%s\n", msg);
+		write(2, msg, i);
+	write(2, "\n", 1);
 }
 
 char	*get_state(t_state state)

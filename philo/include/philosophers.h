@@ -6,7 +6,7 @@
 /*   By: pmoreira <pmoreira@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 13:50:59 by pmoreira          #+#    #+#             */
-/*   Updated: 2025/07/23 11:42:17 by pmoreira         ###   ########.fr       */
+/*   Updated: 2025/07/24 11:31:38 by pmoreira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@
 # include <stdbool.h>
 # include <limits.h>
 # include "structs.h"
-# define ERR_ARG "Invalid number of arguments."
-# define ERR_STX "Invalid syntax of the arguments."
+# define ERR_ARG ": Invalid number of arguments."
+# define ERR_STX ": Invalid syntax of the arguments."
+# define USAGE "USAGE: number_of_philosophers time_to_die time_to_eat "
+# define USAGE2 "time_to_sleep [number_of_times_each_philosopher_must_eat]\n"
 # define RED "\e[0;31m"
 # define GRN "\e[0;32m"
 # define YEL "\e[0;33m"
@@ -38,6 +40,7 @@ int			ft_isdigit(int c);
 int			get_value(unsigned int *ptr, char *s);
 int			parser(t_data *data, char **av);
 long int	ft_strtol(char *s, char **endptr, int base, int *flag);
+size_t		ft_strlen(char *s);
 
 //* Utils
 
